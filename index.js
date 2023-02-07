@@ -35,7 +35,7 @@ console.log(Item1) */
 
 // класс для хранения каталога товаров со свойствами
 class GoodsList {
-sortPrice
+    
     #goods = []
 
     constructor(goods, filter, sortPrice, sortDir) {
