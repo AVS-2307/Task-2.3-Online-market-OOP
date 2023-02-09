@@ -95,8 +95,8 @@ const newCatalog = new GoodsList(goodsAll, /'тап'/i, true, true);
 
 class BasketGood extends Good {
 
-    constructor(good, amount) {
-        super(good.id, good.name, good.description, good.sizes, good.price, good.available)
+    constructor(id, name, description, sizes, price, available, amount) {
+        super(id, name, description, sizes, price, available)
         this.amount = amount
     }
 }
@@ -129,9 +129,18 @@ class Basket {
             this.goods[i].amount += amount
             
         }
-        else {            
-            this.goods.push(good)
-        }  
+        else {
+            let addProduct = new BasketGood(
+                good.id,
+                good.name,
+                good.description,
+                good.sizes,
+                good.price,
+                good.available,
+                amount
+            );
+            this.goods.push(addProduct);
+        }
     }
     // Уменьшает количество товара в корзине, если количество становится равным нулю, товар удаляется
     remove(good, amount) {
@@ -172,9 +181,9 @@ const newBasketItem4 = new BasketGood(Item4, 7);
 let basket_new = new Basket()
 
 //добавление товаров
-basket_new.add(newBasketItem1, 5)
-basket_new.add(newBasketItem3, 3)
-basket_new.add(newBasketItem3, 3)
+basket_new.add(Item1, 5)
+basket_new.add(Item3, 3)
+basket_new.add(Item3, 3)
 
 console.log(basket_new)
 
