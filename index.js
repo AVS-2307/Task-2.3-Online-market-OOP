@@ -35,7 +35,7 @@ console.log(Item1) */
 
 // класс для хранения каталога товаров со свойствами
 class GoodsList {
-    
+
     #goods = []
 
     constructor(goods, filter, sortPrice, sortDir) {
@@ -48,22 +48,16 @@ class GoodsList {
     //возвращает массив доступных для продажи товаров в соответствии с установленным фильтром и сортировкой по полю Price
 
     get list() {
-
-        let sorteredFilteredList = []
-
-        for (let i = 0; i < this.#goods.length; i++ ) {
-            if (this.filter.test(this.#goods[i].name) === true) {
-                sorteredFilteredList.push(this.#goods[i]);
-                }
+        this.temp = this.#goods.filter(good => this.filter.test(good.name))
+        if (this.sortPrice) {
+            if (this.sortDir) {
+                this.temp.sort((item1, item2) => item1.price - item2.price)
+            } else {
+                this.temp.sort((item1, item2) => item2.price - item1.price)
             }
-            
-        if (this.sortPrice === true && this.sortDir === true) {
-                    return sorteredFilteredList.sort()  
-                }
-        else if (this.sortPrice === true && this.sortDir === false) {
-                    return sorteredFilteredList.reverse()  
-                }        
-            } 
+        }
+        return this.temp
+    }
     
 
     // добавление товара в каталог
